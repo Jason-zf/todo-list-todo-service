@@ -1,5 +1,6 @@
 package com.thoughtworks.training.todoservice.service;
 
+import com.thoughtworks.training.todoservice.exception.NotFoundException;
 import com.thoughtworks.training.todoservice.model.Todo;
 import com.thoughtworks.training.todoservice.repository.TodoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,8 +15,12 @@ public class TodoService {
     @Autowired
     private TagService tagService;
 
-    public Todo getOne(Long id) {
-        return todoRepository.findOne(id);
+    public Todo getOne(Long id) throws NotFoundException {
+        Todo todo = todoRepository.findOne(id);
+        if (todo == null) {
+            throw new NotFoundException();
+        }
+        return todo;
     }
 
     public List<Todo> getAll() {
