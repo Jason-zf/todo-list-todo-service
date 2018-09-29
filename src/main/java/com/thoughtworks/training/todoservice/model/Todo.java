@@ -14,6 +14,7 @@ import java.util.List;
 @Data
 public class Todo {
 
+    //Id 导入包错误引起缺少identifier错误
     @Id
     @GeneratedValue
     private Long id;

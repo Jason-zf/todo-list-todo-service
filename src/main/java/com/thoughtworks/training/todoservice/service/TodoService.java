@@ -11,6 +11,8 @@ import java.util.List;
 public class TodoService {
     @Autowired
     private TodoRepository todoRepository;
+    @Autowired
+    private TagService tagService;
 
     public Todo getOne(Long id) {
         return todoRepository.findOne(id);
@@ -21,6 +23,7 @@ public class TodoService {
     }
 
     public Todo addOne(Todo todo) {
+        tagService.add(todo.getTags());
         return todoRepository.save(todo);
     }
 
@@ -30,6 +33,7 @@ public class TodoService {
     }
 
     public Todo updateOne(Todo todo) {
+        tagService.add(todo.getTags());
         return todoRepository.save(todo);
     }
 }
